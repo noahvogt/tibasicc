@@ -1,11 +1,12 @@
 # tibasicc - a compiler for TI-BASIC code 
-# See LICENSE file for copyright and license details.  PROJDIRS := src
+# See LICENSE file for copyright and license details.  
 
 VERSION = 0.1
 
 # paths
 PREFIX = /usr/local/
 
+PROJDIRS := src
 SRCFILES := $(shell find $(PROJDIRS) -type f -name "*.cpp")
 OBJFILES := $(patsubst %.cpp,%.o,$(SRCFILES))
 DEPFILES := $(patsubst %.cpp,%.d,$(SRCFILES))
