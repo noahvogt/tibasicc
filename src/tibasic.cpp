@@ -42,6 +42,19 @@ size_t Compiler::sumBytes(const char *data, size_t len)
     return ret;
 }
 
+string trim(const string& str)
+{
+    size_t first = str.find_first_not_of(' ');
+    if (string::npos == first)
+    {
+        return str;
+    }
+    size_t last = str.find_last_not_of(' ');
+    return str.substr(first, (last - first + 1));
+}
+
+extern bool verbose;
+
 bool Compiler::compile(string inFile, string outFile)
 {
     ifstream f(inFile.c_str(), ifstream::in);
@@ -56,13 +69,27 @@ bool Compiler::compile(string inFile, string outFile)
     {
         getline(f, tmpLine, '\n');
 
-        // ignore comments
-        tmpLine = tmpLine.substr(0, tmpLine.find("#", 0));
-
         // ignore empty lines
         if(!tmpLine.length())
         {
-            //log(Debug, "Line with only whitespaces / comments detected!");
+            if(verbose)
+                log(Debug, "Empty line detected!");
+            continue;
+        }
+
+        // remove comments
+        tmpLine = tmpLine.substr(0, tmpLine.find("#", 0));
+
+        // strip spaces at the beginning and end of lines
+        tmpLine = trim(tmpLine);
+
+
+        // ignore lines with now only whitespaces
+        bool containsSpaces = tmpLine.find_first_not_of(' ') != std::string::npos;
+        if(!containsSpaces)
+        {
+            if(verbose)
+                log(Debug, "Line with only whitespaces / comments detected!");
             continue;
         }
 
@@ -103,7 +130,8 @@ bool Compiler::compile(string inFile, string outFile)
             {
                 outputSize += token.sz;
                 output.push_back(token);
-
+                if(verbose)
+                    std::cout << "Debug: '" << s << "'\n";
                 tmpLine = tmpLine.substr(s.length(), tmpLine.length());
             }
         }

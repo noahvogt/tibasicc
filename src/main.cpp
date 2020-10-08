@@ -58,6 +58,9 @@ void stripExtension(const char *in, char *out, size_t len)
     *strrchr(out, '.') = 0;
 }
 
+// declare global variable to set debug mode later
+bool verbose = false;
+
 int main( int argc, char* argv[] )
 {
 	// check for valid number of arguments
@@ -89,6 +92,8 @@ int main( int argc, char* argv[] )
             }
             outFile = argv[i];
         }
+        else if(!strcmp(argv[i], "-v"))
+            verbose = true;
         else if(!strcmp(argv[i], "-d"))
             bDecompile = true;
         else
@@ -122,6 +127,9 @@ int main( int argc, char* argv[] )
         else
             outFile += ".8xp";
 
+        // print that verbose mode is activated
+        if(verbose)
+            log(Info, "Verbose Mode successfully activated");
     }
 
     // Make sure we have tokens to work with!
