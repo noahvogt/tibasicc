@@ -1,25 +1,5 @@
 # The TI-BASIC Compiler (tibasicc)
 
-The TI-BASIC Compiler is all about compiling TI-BASIC code on your computer into an .8xp file ready for transferring to your TI-83/TI-83+/TI-84 calculator.
-
-Being able to type your programs on a real keyboard instead of the calculator's keypad is much easier and avoids some otherwise big pain.
-
-*Note:* This project is a fork from [pcmattman/tibasic](https://sourceforge.net/projects/tibasic/).
-
-## Installation
-
-I have only tested this on GNU/Linux, but it should work on any other unix-like OS like MacOS:
-
-    git clone https://github.com/noahvogt/tibasicc.git
-    cd tibasicc
-    sudo make clean install
-
-## Create files and folders
-
-
-
-# The TI-BASIC Compiler (tibasicc)
-
 The TI-BASIC Compiler is all about compiling TI-BASIC code on your computer into an .8xp file ready for transferring to your TI-83/TI-83+/TI-84 calculator (and vice versa).
 
 Being able to type your programs on a real keyboard instead of the calculator's keypad is much easier and avoids some otherwise big pain.
