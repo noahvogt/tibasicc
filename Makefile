@@ -13,7 +13,7 @@ DEPFILES := $(patsubst %.cpp,%.d,$(SRCFILES))
 
 .PHONY: all clean
 
-CXXFLAGS := -g -Wall -pedantic -Werror
+CXXFLAGS := -g -Wall -pedantic -Werror -O
 
 CXX := g++
 
