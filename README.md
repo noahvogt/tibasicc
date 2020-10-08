@@ -33,5 +33,5 @@ Preprocessor
 - strip off unneeded whitespaces to make the binary smaller
 
 Additional Options
-- verbose / debug mode that give a lot of information (`-v` flag)
+- verbose / debug mode that gives a lot of information (`-v` flag)
 - specify output file (`-o` flag)
