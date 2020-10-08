@@ -4,5 +4,5 @@ build-etc/Release
 build-etc/ipch
 build-etc/*sdf
 build-etc/*suo
-build-etc/*vcxproj.*
 src/*.o
+tibasicc
