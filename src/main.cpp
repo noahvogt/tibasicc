@@ -102,16 +102,26 @@ int main( int argc, char* argv[] )
     // use that as the output.
     if(!outFile.length())
     {
-        char *tmp = new char[inFile.length()];
-        stripExtension(inFile.c_str(), tmp, inFile.length());
+        // check for file extension and strip it if found
+        if(strchr(inFile.c_str(), '.'))
+        {
+            char *tmp = new char[inFile.length()];
+            stripExtension(inFile.c_str(), tmp, inFile.length());
 
-        outFile = tmp;
+            outFile = tmp;
+            delete [] tmp;
+        }
+        else
+        {
+            outFile = inFile;
+        }
+        
+        // set file extension for the output file
         if(bDecompile)
             outFile += ".tib";
         else
             outFile += ".8xp";
 
-        delete [] tmp;
     }
 
     // Make sure we have tokens to work with!
