@@ -21,4 +21,4 @@ After installing, this program should be in your `path`. This means, you can cal
 
     tibasicc [options]
 
-I haven't made a man page for this simple program yet, but you can get some usage information when you run this program without any arguments.
+I haven't made a man page for this simple program yet, but you can get some usage information when you run this program without any arguments or with some help flags (` -h` or ` --help`).
