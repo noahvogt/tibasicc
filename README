@@ -30,10 +30,6 @@ Roots --> '[root]^' (for instance, square root would be '[root]^2')
 
 All Picture variables (Pic0 - Pic9) and String variables (Str0 - Str9) are CAPITALIZED (ie. STR0)
 
-Other shorthand versions for more obscure functions exist, to find these the source code is viewable (Develop tab on the SourceForge page).
-
 -----------------------------------------
-
-As a final note, all support requests must go to either the 'Support Requests' tracker on the SourceForge page, or pcmattman@gmail.com (the email method usually gets a reply within 24 hours). The trackers are checked often so you can be assured that your request for help will be responded to.
 
 Happy programming!
