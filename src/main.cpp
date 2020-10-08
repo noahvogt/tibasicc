@@ -61,15 +61,31 @@ void stripExtension(const char *in, char *out, size_t len)
 // declare global variable to set debug mode later
 bool verbose = false;
 
+// define help message
+string helpMessage = "\
+Usage: tibasicc [options] filename\n\
+Options:\n\
+\t-d\t\tdecompile\n\
+\t-o filename\tspecify output filename\n\
+\t-v\t\tverbose / debug mode\n\
+\t-h, --help\tprint this help message";
+
 int main( int argc, char* argv[] )
 {
 	// check for valid number of arguments
 	if((argc < 2) || (argv[1] == NULL))
 	{
-		// Inform the user
-        log(Error, "Usage: tibasicc [options] filename\nOptions:\n\t-d\t\tDecompile\n\t-o filename\tOutput file");
+		// display error and help message when no arguments given
+        cout << "Error: " << helpMessage << "\n";
 		return 1;
 	}
+
+    if(!strcmp(argv[1], "-h") || !strcmp(argv[1], "--help"))
+    {
+		// display help message when help flag arguments given
+        cout << helpMessage << "\n";
+        return 0;
+    }
 
     Compiler compiler; Compiler *pCompiler = &compiler;
 
@@ -96,6 +112,11 @@ int main( int argc, char* argv[] )
             verbose = true;
         else if(!strcmp(argv[i], "-d"))
             bDecompile = true;
+        else if(!strcmp(argv[i], "--help"))
+        {
+            cout << helpMessage << "\n";
+            return 0;
+        }
         else
         {
             log(Error, "Unknown option specified");
