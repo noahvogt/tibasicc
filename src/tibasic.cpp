@@ -56,8 +56,16 @@ bool Compiler::compile(string inFile, string outFile)
     {
         getline(f, tmpLine, '\n');
 
+        // ignore comments
+        tmpLine = tmpLine.substr(0, tmpLine.find("#", 0));
+
+        // ignore empty lines
         if(!tmpLine.length())
+        {
+            //log(Debug, "Line with only whitespaces / comments detected!");
             continue;
+        }
+
 
         // Parse.
         token_t token;
