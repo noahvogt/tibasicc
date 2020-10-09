@@ -6,7 +6,8 @@ Being able to type your programs on a real keyboard instead of the calculator's 
 *Note:* This project is a fork from [pcmattman/tibasic](https://sourceforge.net/projects/tibasic/).
 
 ## Installation
-If you are using Arch Linux, you can just install my [AUR Package](https://aur.archlinux.org/packages/tibasicc-git/) with your prefered aur helper (yay, pacaur, yaourt, etc.):
+#### Unix (GNU/Linux, MacOS, FreeBSD, etc.)
+If you are using Arch, you can just install my [AUR Package](https://aur.archlinux.org/packages/tibasicc-git/) with your prefered aur helper (yay, pacaur, yaourt, etc.):
 
     yay -S tibasicc-git
 
@@ -16,7 +17,14 @@ For other systems, here is my also fairly easy general approach. I have only tes
     cd tibasicc
     sudo make clean install
 
-*Note:* If you are a Windows User, I would recommend using WSL or you can make your own fork of this project, because I haven't made/released a Windows-compatible version yet.
+#### Windows
+If you are a Windows User,  you have to install [git](https://git-scm.com/) (don't forget to add it to your *Path variable* during the setup process) and [MinGW](http://mingw.org/) first. Now open `cmd.exe` with administrator privileges and enter these commands:
+	
+	git clone https://github.com/noahvogt/tibasicc.git
+	cd tibasicc
+	win-installer.bat
+
+Now you have to add the directories specified in the output of the install-script to your *Path variable*. To do this, press the *'Windows Key'* and search for "path". In the window that popped up, click "Environment Variables...". In this window you have to select a *path variable* (you can choose on your own between the system-wide variable and the user-wide variable), click "Edit..." and add them. Now you can open a new terminal window and it should work.
 
 ## Usage
 After installing, this program should be in your `path`. This means, you can call it from the terminal like this:
