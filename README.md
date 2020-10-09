@@ -6,7 +6,11 @@ Being able to type your programs on a real keyboard instead of the calculator's 
 *Note:* This project is a fork from [pcmattman/tibasic](https://sourceforge.net/projects/tibasic/).
 
 ## Installation
-I have only tested this on GNU/Linux, but it should work on any other unix-like OS like MacOS:
+If you are using Arch Linux, you can just install my [AUR Package](https://aur.archlinux.org/packages/tibasicc-git/) with your prefered aur helper (yay, pacaur, yaourt, etc.):
+
+    yay -S tibasicc-git
+
+For other systems, here is my also fairly easy general approach. I have only tested this on GNU/Linux, but it should work on any other unix-like OS like MacOS:
 
     git clone https://github.com/noahvogt/tibasicc.git
     cd tibasicc
@@ -17,7 +21,7 @@ I have only tested this on GNU/Linux, but it should work on any other unix-like 
 ## Usage
 After installing, this program should be in your `path`. This means, you can call it from the terminal like this:
 
-    tibasicc [options]
+    tibasicc [options] filename
 
 I haven't made a man page for this simple program yet, but you can get some usage information when you run this program without any arguments or with some help flags (`-h` or `--help`).
 
