@@ -1,0 +1,9 @@
+[Trigger]
+Type = Package
+Operation = Remove
+Target = tibasicc-git
+
+[Action]
+Description = remove all binarys
+When = PostTransaction
+Exec = /usr/bin/rm -f /usr/bin/tibasicc
