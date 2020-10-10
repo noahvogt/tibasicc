@@ -5,7 +5,7 @@ if not exist "%HOMEDRIVE%\Program Files (x86)\tibasicc\bin" (
 	mkdir "%HOMEDRIVE%\Program Files (x86)\tibasicc\bin" || goto adminError
 	echo folder "%HOMEDRIVE%\Program Files (x86)\tibasicc\bin" has been created.
 )
-:: add g++ to path (only in this session)
+:: add g++ to path variable (only in this session)
 set PATH=%PATH%;C:\MinGW\bin\
 
 
