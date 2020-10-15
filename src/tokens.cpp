@@ -45,7 +45,7 @@ struct ConvertRule {
 };
 
 /// References to lists defined after functions.
-extern struct Token StandardTokens[199];
+extern struct Token StandardTokens[200];
 extern struct TwoByte CalcVars[302];
 extern struct ConvertRule Replacements[39];
 
@@ -372,6 +372,7 @@ bool lookupToken(unsigned short in, string &out)
 #define PLOT1			0xEC
 #define PLOT2			0xED
 #define PLOT3			0xEE
+#define TOSTRING        0xEF
 #define POWEROF			0xF0
 #define XTHROOT			0xF1
 #define VARSTATS_1		0xF2
@@ -727,7 +728,7 @@ struct Token StandardTokens[] = {
 	{ CTL_REPEAT,		"Repeat "	},
 	{ CTL_END,			"End"		},
 	{ CTL_PAUSE,		"Pause "	},
-	{ CTL_PAUSE,		"Pause"		},
+	{ CTL_PAUSE,		"Pause"		}, // note the space above
 	{ LABEL,			"Lbl "		},
 	{ CTL_GOTO,			"Goto "		},
 	{ INCSKIPIFHIGH,	"IS>("		},
@@ -747,6 +748,7 @@ struct Token StandardTokens[] = {
 	{ GETKEY,			"getKey"	},
 	{ CLRHOME,			"ClrHome"	},
 	{ CLRTABLE,			"ClrTable"	},
+    { TOSTRING,         "toString(" },
 
 	/** GetCalc **/
 	{ GET,				"Get("		},

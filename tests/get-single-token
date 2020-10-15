@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# This is a shell script to get the binary (in hex format)
+# from a file created on the TI-84 that contains a single 
+# token. This is to add new tokens very quick and easy.
+
+# Note: Sometimes a token only uses only one binary, but
+# sometimes two. Be careful about that.
+
+[ -z $* ] && echo "Error: No Arguments provided" && exit 1
+od -A x -t x1z -v $1
+od -A x -t x1z -v $1 | awk '{if(NR==5) print $12 " " $13}'
