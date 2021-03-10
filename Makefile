@@ -32,7 +32,7 @@ clean:
 
 install: all
 	mkdir -p ${PREFIX}/bin
-	install -Dm755 tibasicc ${PREFIX}/bin/tibasicc
+	install -m751 tibasicc ${PREFIX}/bin/
 
 uninstall:
 	rm -f ${PREFIX}/bin/tibasicc
