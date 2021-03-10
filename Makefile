@@ -4,7 +4,7 @@
 VERSION = 0.1
 
 # paths
-PREFIX = /usr/local
+PREFIX = /usr
 
 PROJDIRS := src
 SRCFILES := $(shell find $(PROJDIRS) -type f -name "*.cpp")
@@ -32,8 +32,7 @@ clean:
 
 install: all
 	mkdir -p ${PREFIX}/bin
-	cp -f tibasicc ${PREFIX}/bin
-	chmod 755 ${PREFIX}/bin/tibasicc
+	install -Dm755 tibasicc ${PREFIX}/bin/tibasicc
 
 uninstall:
 	rm -f ${PREFIX}/bin/tibasicc
