@@ -23,48 +23,48 @@
 
 using namespace std;
 
-/// Describes a potential token to be read by the compiler
+/* Describes a potential token to be read by the compiler */
 struct Token {
-    /// The compiled byte for the token
+    /* The compiled byte for the token */
 	unsigned char data;
 
-    /// The actual text to be converted by the interpreter
+    /* The actual text to be converted by the interpreter */
 	const char* text;
 };
 
-/// A two byte token (0xBB, 0x7E and SysVar)
+/* A two byte token (0xBB, 0x7E and SysVar) */
 struct TwoByte {
 	unsigned short data;
 	const char* text;
 };
 
-/// Direct ASCII character to token conversion.
+/* Direct ASCII character to token conversion. */
 struct ConvertRule {
-	char c;				// the character
-	unsigned char tok;	// the equivalent token
+	char c;				/* the character */
+	unsigned char tok;	/* the equivalent token */
 };
 
-/// References to lists defined after functions.
+/* References to lists defined after functions. */
 extern struct Token StandardTokens[200];
 extern struct TwoByte CalcVars[302];
 extern struct ConvertRule Replacements[39];
 
-/// string -> token mapping
+/* string -> token mapping */
 map<string, token_t> g_TokenLookup;
 
-/// token -> string mapping
+/* token -> string mapping */
 map<unsigned short, string> g_ReverseLookup;
 
-/// Longest input string possible
+/* Longest input string possible */
 size_t g_LongestInput = 0;
 
-/// Shiny little template function that returns the size of an array.
+/* Shiny little template function that returns the size of an array. */
 template <typename T, int N> size_t arrayLen(T(&)[N]){return N;}
 
-/// Initialises the token map
+/* Initialises the token map */
 void initialiseTokens()
 {
-    // Iterate the main token list first.
+    /* Iterate the main token list first. */
     for(size_t i = 0; i < arrayLen(StandardTokens); i++)
     {
         token_t value;
@@ -80,7 +80,7 @@ void initialiseTokens()
         g_ReverseLookup[value.token] = s;
     }
 
-    // Now iterate the two-byte tokens.
+    /* Now iterate the two-byte tokens. */
     for(size_t i = 0; i < (sizeof(CalcVars) / sizeof(Token)); i++)
     {
         token_t value;
@@ -96,7 +96,7 @@ void initialiseTokens()
         g_ReverseLookup[value.token] = s;
     }
 
-    // Finally, iterate single-character tokens.
+    /* Finally, iterate single-character tokens. */
     for(size_t i = 0; i < (sizeof(Replacements) / sizeof(ConvertRule)); i++)
     {
         token_t value;
@@ -116,7 +116,7 @@ size_t getLongestToken()
     return g_LongestInput;
 }
 
-/// Perform a lookup
+/* Perform a lookup */
 bool lookupToken(string in, token_t &ret)
 {
     if(in.length() > g_LongestInput)
@@ -140,7 +140,7 @@ bool lookupToken(unsigned short in, string &out)
     return true;
 }
 
-// Token List
+/* Token List */
 #define TO_DMS			0x01
 #define TO_DEC			0x02
 #define TO_FRAC			0x03
@@ -392,7 +392,7 @@ bool lookupToken(unsigned short in, string &out)
 
 /** SYSTEM VARIABLES **/
 
-// Matrices
+/* Matrices */
 #define MAT_A			0x005C
 #define MAT_B			0x015C
 #define MAT_C			0x025C
@@ -404,7 +404,7 @@ bool lookupToken(unsigned short in, string &out)
 #define MAT_I			0x085C
 #define MAT_J			0x095C
 
-// Lists
+/* Lists */
 #define L1				0x005D
 #define L2				0x015D
 #define L3				0x025D
@@ -416,7 +416,7 @@ bool lookupToken(unsigned short in, string &out)
 #define L9				0x085D
 #define L0				0x095D
 
-// Graph (function)
+/* Graph (function) */
 #define Y1				0x105E
 #define Y2				0x115E
 #define Y3				0x125E
@@ -428,7 +428,7 @@ bool lookupToken(unsigned short in, string &out)
 #define Y9				0x185E
 #define Y0				0x195E
 
-// Graph (parametric)
+/* Graph (parametric) */
 #define X1T				0x205E
 #define Y1T				0x215E
 #define X2T				0x225E
@@ -442,7 +442,7 @@ bool lookupToken(unsigned short in, string &out)
 #define X6T				0x2A5E
 #define Y6T				0x2B5E
 
-// Graph (polar)
+/* Graph (polar) */
 #define R1				0x405E
 #define R2				0x415E
 #define R3				0x425E
@@ -452,7 +452,7 @@ bool lookupToken(unsigned short in, string &out)
 #define SYSVAR_U		0x805E
 #define SYSVAR_V		0x815E
 
-// Pictures
+/* Pictures */
 #define PIC1			0x0060
 #define PIC2			0x0160
 #define PIC3			0x0260
@@ -464,7 +464,7 @@ bool lookupToken(unsigned short in, string &out)
 #define PIC9			0x0860
 #define PIC0			0x0960
 
-// Graph databases
+/* Graph databases */
 #define GDB1			0x0061
 #define GDB2			0x0161
 #define GDB3			0x0261
@@ -476,7 +476,7 @@ bool lookupToken(unsigned short in, string &out)
 #define GDB9			0x0861
 #define GDB0			0x0961
 
-// Stat data
+/* Stat data */
 #define REGEQ			0x0162
 #define STAT_N			0x0262
 #define MEANX			0x0362
@@ -531,14 +531,14 @@ bool lookupToken(unsigned short in, string &out)
 #define SYSVAR_S		0x3462
 #define RSQUARED		0x3562
 #define CAPRSQUARED		0x3662
-#define DF2				0x3762 // not sure about this one
+#define DF2				0x3762 /* not sure about this one */
 #define SS				0x3862
 #define MS				0x3962
-#define DF3				0x3A62 // again here?
-#define SS1				0x3B62 // another double
-#define MS1				0x3C62 //   "       "
+#define DF3				0x3A62 /* again here? */
+#define SS1				0x3B62 /* another double */
+#define MS1				0x3C62 /*   "       " */
 
-// Graph data
+/* Graph data */
 #define ZXSCL			0x0063
 #define ZYSCL			0x0163
 #define XSCL			0x0263
@@ -590,7 +590,7 @@ bool lookupToken(unsigned short in, string &out)
 #define XRES			0x3063
 #define ZXRES			0x3163
 
-// Strings
+/* Strings */
 #define STR1			0x00AA
 #define STR2			0x01AA
 #define STR3			0x02AA
@@ -717,7 +717,7 @@ bool lookupToken(unsigned short in, string &out)
 #define MODBOXPLOT		0x5ABB
 #define NORMPROBPLOT	0x5BBB
 
-// Standard Tokens are any token that can be used anywhere in the line.
+/* Standard Tokens are any token that can be used anywhere in the line. */
 struct Token StandardTokens[] = {
 	/** CONTROL page of PROGRAM EDITOR (press PRGM when EDITING a program) **/
 	{ LOGIC_IF,			"If "		},
@@ -728,7 +728,7 @@ struct Token StandardTokens[] = {
 	{ CTL_REPEAT,		"Repeat "	},
 	{ CTL_END,			"End"		},
 	{ CTL_PAUSE,		"Pause "	},
-	{ CTL_PAUSE,		"Pause"		}, // note the space above
+	{ CTL_PAUSE,		"Pause"		}, /* note the space above */
 	{ LABEL,			"Lbl "		},
 	{ CTL_GOTO,			"Goto "		},
 	{ INCSKIPIFHIGH,	"IS>("		},
@@ -932,13 +932,13 @@ struct Token StandardTokens[] = {
 	{ RAND,				"rand"			},
 };
 
-// two-byte variables
+/* two-byte variables */
 struct TwoByte CalcVars[] = {
-	// AsmPrgm (uncompiled)
+	/* AsmPrgm (uncompiled) */
 	{ 0x6CBB,			"AsmPrgm"	},
-	{ 0x6DBB,			"AsmPrgm"	}, // this means decompilation works, but compilation won't hit this
+	{ 0x6DBB,			"AsmPrgm"	}, /* this means decompilation works, but compilation won't hit this */
 
-	// SysVar
+	/* SysVar */
 	{ MAT_A,			"[A]"		},
 	{ MAT_B,			"[B]"		},
 	{ MAT_C,			"[C]"		},
@@ -1009,7 +1009,7 @@ struct TwoByte CalcVars[] = {
 	{ GDB8,				"GDB8"		},
 	{ GDB9,				"GDB9"		},
 	{ GDB0,				"GDB0"		},
-	// finally, StatVars
+	/* finally, StatVars */
 	{ SX1,				"Sx1"		},
 	{ SX2,				"Sx2"		},
 	{ SXP,				"Sxp"		},
@@ -1038,14 +1038,14 @@ struct TwoByte CalcVars[] = {
 	{ SYSVAR_B,			"[b]"		},
 	{ SYSVAR_C,			"[c]"		},
 	{ SYSVAR_D,			"[d]"		},
-	{ SYSVAR_E,			"[stat_e]"	}, // because '[e]' refers to the constant e
+	{ SYSVAR_E,			"[stat_e]"	}, /* because '[e]' refers to the constant e */
 	{ X1,				"x1"		},
 	{ X2,				"x2"		},
 	{ X3,				"x3"		},
 	{ Y1_1,				"y1"		},
 	{ Y2_1,				"y2"		},
 	{ Y3_1,				"y3"		},
-	{ SYSVAR_N,			"[n]"		}, // somebody please tell me why there are so many variations on n
+	{ SYSVAR_N,			"[n]"		}, /* somebody please tell me why there are so many variations on n */
 	{ SYSVAR_P,			"[p]"		},
 	{ SYSVAR_Z,			"[z]"		},
 	{ SYSVAR_T,			"[t]"		},
@@ -1064,12 +1064,12 @@ struct TwoByte CalcVars[] = {
 	{ SYSVAR_S,			"[s]"		},
 	{ RSQUARED,			"r^2"		},
 	{ CAPRSQUARED,		"R^2"		},
-	{ DF2,				"[df]"		}, // somebody was high when they invented the token tables
+	{ DF2,				"[df]"		}, /* somebody was high when they invented the token tables */
 	{ SS,				"SS"		},
-	{ DF3,				"[df]"		}, // see previous comment
-	{ SS1,				"SS"		}, // again...
-	{ MS1,				"MS"		}, // and again!
-	// graph data
+	{ DF3,				"[df]"		}, /* see previous comment */
+	{ SS1,				"SS"		}, /* again... */
+	{ MS1,				"MS"		}, /* and again! */
+	/* graph data */
 	{ ZXSCL,			"ZXscl"		},
 	{ ZYSCL,			"ZYscl"		},
 	{ XSCL,				"Xscl"		},
@@ -1078,8 +1078,8 @@ struct TwoByte CalcVars[] = {
 	{ ZVNSTART,			"ZVnStart"	},
 	{ UNSTART,			"UnStart"	},
 	{ VNSTART,			"VnStart"	},
-	{ UNINVERSE,		"Un-1"		}, // i read a ^-1, but it's actually a -1...
-	{ VNINVERSE,		"Vn-1"		}, // same as above
+	{ UNINVERSE,		"Un-1"		}, /* i read a ^-1, but it's actually a -1... */
+	{ VNINVERSE,		"Vn-1"		}, /* same as above */
 	{ ZXMIN,			"ZXmin"		},
 	{ ZXMAX,			"ZXmax"		},
 	{ ZYMIN,			"ZYmin"		},
@@ -1113,15 +1113,15 @@ struct TwoByte CalcVars[] = {
 	{ XFACT,			"XFact"		},
 	{ YFACT,			"YFact"		},
 	{ TBLINPUT,			"TblInput"	},
-	// finance app
-	{ SYSVAR_CAPN,		"[N]"		}, // this is the N in the Finance app
+	/* finance app */
+	{ SYSVAR_CAPN,		"[N]"		}, /* this is the N in the Finance app */
 	{ IPERCENT,			"I%"		},
 	{ PV,				"PV"		},
 	{ PMT,				"PMT"		},
 	{ FV,				"FV"		},
 	{ ZXRES,			"ZXres"		},
 	{ XRES,				"Xres"		},
-	// strings
+	/* strings */
 	{ STR1,				"STR1"		},
 	{ STR2,				"STR2"		},
 	{ STR3,				"STR3"		},
@@ -1132,7 +1132,7 @@ struct TwoByte CalcVars[] = {
 	{ STR8,				"STR8"		},
 	{ STR9,				"STR9"		},
 	{ STR0,				"STR0"		},
-	// 7E Variables
+	/* 7E Variables */
 	{ SEQ,				"Sequential"	},
 	{ SIMUL,			"Simul"			},
 	{ POLARGC,			"PolarGC"		},
@@ -1152,7 +1152,7 @@ struct TwoByte CalcVars[] = {
 	{ UVAXES,			"uvAxes"		},
 	{ VWAXES,			"vwAxes"		},
 	{ UWAXES,			"uwAxes"		},
-	// BB Variables
+	/* BB Variables */
 	{ NPV,				"npv("			},
 	{ IRR,				"irr("			},
 	{ BAL,				"bal("			},
@@ -1202,7 +1202,7 @@ struct TwoByte CalcVars[] = {
 	{ RREF,				"rref("			},
 	{ TORECT,			"->Rect"		},
 	{ TOPOLAR,			"->Polar"		},
-	{ VAR_E,			"[e]"			}, // e by itself is impossible, and dangerous (imagine Disp "Hello"!)
+	{ VAR_E,			"[e]"			}, /* e by itself is impossible, and dangerous (imagine Disp "Hello"!) */
 	{ SINREG,			"SinReg "		},
 	{ LOGISTIC,			"Logistic "		},
 	{ LINREGTTEST,		"LinRegTTest "	},
@@ -1247,8 +1247,9 @@ struct TwoByte CalcVars[] = {
 	{ NORMPROBPLOT,		"NormProbPlot"	},
 };
 
-// Replacements
-// Replacements are rules that define special characters that must be replaced with a token.
+/* Replacements
+ * Replacements are rules that define special characters that must be replaced with a token.
+ */
 struct ConvertRule Replacements[] = {
 	{ '"', DOUBLEQUOTE },
 	{ '\'', APOSTROPHE },

@@ -14,8 +14,8 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-// When VC++ compiles in debug mode, it will set _DEBUG. This sets DEBUG
-// in order to avoid the VC++-ism.
+/* When VC++ compiles in debug mode, it will set _DEBUG. This sets DEBUG */
+/* in order to avoid the VC++-ism. */
 #ifdef _DEBUG
 #define DEBUG
 #endif
@@ -33,7 +33,7 @@
 
 using namespace std;
 
-/// Helper function to convert a string to uppercase.
+/* Helper function to convert a string to uppercase. */
 char* strtoupper(char* str)
 {
 	for( size_t i = 0; i < strlen( str ); i++ )
@@ -44,7 +44,7 @@ char* strtoupper(char* str)
 	return str;
 }
 
-/// Logs output from the build
+/* Logs output from the build */
 void log(LogSeverity severity, const char *out)
 {
     cout << severityToString(severity) << ": " << out << endl;
@@ -58,10 +58,10 @@ void stripExtension(const char *in, char *out, size_t len)
     *strrchr(out, '.') = 0;
 }
 
-// declare global variable to set debug mode later
+/* declare global variable to set debug mode later */
 bool verbose = false;
 
-// define help message
+/* define help message */
 string helpMessage = "\
 Usage: tibasicc [options] filename\n\
 Options:\n\
@@ -72,17 +72,17 @@ Options:\n\
 
 int main( int argc, char* argv[] )
 {
-	// check for valid number of arguments
+	/* check for valid number of arguments */
 	if((argc < 2) || (argv[1] == NULL))
 	{
-		// display error and help message when no arguments given
+		/* display error and help message when no arguments given */
         cout << "Error: " << helpMessage << "\n";
 		return 1;
 	}
 
     if(!strcmp(argv[1], "-h") || !strcmp(argv[1], "--help"))
     {
-		// display help message when help flag arguments given
+		/* display help message when help flag arguments given */
         cout << helpMessage << "\n";
         return 0;
     }
@@ -93,14 +93,14 @@ int main( int argc, char* argv[] )
 
     bool bDecompile = false;
 
-    // Parse arguments
-    inFile = argv[argc - 1]; // Last argument is always filename
+    /* Parse arguments */
+    inFile = argv[argc - 1]; /* Last argument is always filename */
     for(int i = 1; i < argc - 1; i++)
     {
         if(!strcmp(argv[i], "-o") && !outFile.length())
         {
-            i++; // Next argument is filename
-            // Output filename
+            i++; /* Next argument is filename */
+            /* Output filename */
             if(i >= argc - 1)
             {
                 log(Error, "-o requires a parameter (output filename).");
@@ -124,11 +124,12 @@ int main( int argc, char* argv[] )
         }
     }
 
-    // If no output was given, rename the input with .8xp instead of .tib and
-    // use that as the output.
+    /* If no output was given, rename the input with .8xp instead of .tib and 
+     * use that as the output.
+     */
     if(!outFile.length())
     {
-        // check for file extension and strip it if found
+        /* check for file extension and strip it if found */
         if(strchr(inFile.c_str(), '.'))
         {
             char *tmp = new char[inFile.length()];
@@ -142,21 +143,21 @@ int main( int argc, char* argv[] )
             outFile = inFile;
         }
         
-        // set file extension for the output file
+        /* set file extension for the output file */
         if(bDecompile)
             outFile += ".tib";
         else
             outFile += ".8xp";
 
-        // print that verbose mode is activated
+        /* print that verbose mode is activated */
         if(verbose)
             log(Info, "Verbose Mode successfully activated");
     }
 
-    // Make sure we have tokens to work with!
+    /* Make sure we have tokens to work with! */
     initialiseTokens();
 
-    // Compile time!
+    /* Compile time! */
     if(inFile.length() && outFile.length())
     {
         bool res = false;

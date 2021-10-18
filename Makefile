@@ -13,7 +13,7 @@ DEPFILES := $(patsubst %.cpp,%.d,$(SRCFILES))
 
 .PHONY: all clean
 
-CXXFLAGS := -g -Wall -pedantic -O 
+CXXFLAGS := -g -Wall -pedantic -O -D_FORTIFY_SOURCE=2
 
 CXX := g++
 
@@ -28,7 +28,7 @@ tibasicc: $(OBJFILES)
 	@$(CXX) $(CFLAGS) -MMD -MP -c $< -o $@
 
 clean:
-		rm -f $(OBJFILES)/*.o
+		rm -f $(OBJFILES)
 
 install: all
 	mkdir -p ${PREFIX}/bin

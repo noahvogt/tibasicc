@@ -25,14 +25,14 @@
 #define PACKED __attribute__((packed))
 #endif
 
-/// Stores a token to be written and the size of that token.
+/* Stores a token to be written and the size of that token. */
 typedef struct
 {
     unsigned short token;
     size_t sz;
 } token_t;
 
-/// Log severities
+/* Log severities */
 enum LogSeverity
 {
     Error,
@@ -68,10 +68,10 @@ inline const char *severityToString(LogSeverity s)
     };
 }
 
-/// Log function
+/* Log function */
 void log(LogSeverity, const char *);
 
-/// Compilation class.
+/* Compilation class. */
 class Compiler
 {
     public:
@@ -83,7 +83,7 @@ class Compiler
         bool decompile(std::string inFile, std::string outFile);
 
     private:
-        /// Perform a checksum over a region of data.
+        /* Perform a checksum over a region of data. */
         size_t sumBytes(const char *data, size_t len);
         unsigned short doChecksum(size_t sum);
 
@@ -91,16 +91,16 @@ class Compiler
 #pragma pack(push, 1)
 #endif
 
-        /// 8xp file header
+        /* 8xp file header */
         struct ProgramHeader
         {
-            char sig[8];
+            char sig[9];
             char extsig[3];
             char comment[42];
             unsigned short datalen;
         } PACKED;
 
-        /// Variable entry
+        /* Variable entry */
         struct VariableEntry
         {
             unsigned short start;
