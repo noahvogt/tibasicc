@@ -7,11 +7,11 @@ Being able to type your programs on a real keyboard instead of the calculator's 
 
 ## Installation
 #### Unix (GNU/Linux, MacOS, FreeBSD, etc.)
-If you are using Arch, you can just install my [AUR Package](https://aur.archlinux.org/packages/tibasicc-git/) with your prefered aur helper (yay, pacaur, yaourt, etc.):
+If you are using Arch, you can just install my [AUR Package](https://aur.archlinux.org/packages/tibasicc-git/) either with your prefered aur helper (paru, yay, etc.) or manually:
 
-    yay -S tibasicc-git
+    paru -S tibasicc-git
 
-For other systems, here is my also fairly easy general approach. I have only tested this on GNU/Linux, but it should work on any other unix-like OS like MacOS:
+For other systems, here is my also fairly easy general approach. I have recently only tested this on GNU/Linux, but it should still work on any other unix-like OS like MacOS:
 
     git clone https://github.com/noahvogt/tibasicc.git
     cd tibasicc

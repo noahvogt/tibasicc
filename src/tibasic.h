@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2021 Noah Vogt <noah@noahvogt.com>
  * Copyright (c) 2011 Matthew Iselin
  *
  * Permission to use, copy, modify, and distribute this software for any
@@ -19,22 +20,14 @@
 
 #include <string>
 
-#ifdef _MSC_VER
-#define PACKED
-#else
-#define PACKED __attribute__((packed))
-#endif
-
 /* Stores a token to be written and the size of that token. */
-typedef struct
-{
+typedef struct {
     unsigned short token;
     size_t sz;
 } token_t;
 
 /* Log severities */
-enum LogSeverity
-{
+enum LogSeverity {
     Error,
     Info,
     Debug
@@ -49,10 +42,8 @@ size_t getLongestToken();
 bool lookupToken(std::string in, token_t &ret);
 bool lookupToken(unsigned short in, std::string &out);
 
-inline const char *severityToString(LogSeverity s)
-{
-    switch(s)
-    {
+inline const char *severityToString(LogSeverity s) {
+    switch(s) {
         case Error:
             return "Error";
             break;
@@ -71,50 +62,5 @@ inline const char *severityToString(LogSeverity s)
 /* Log function */
 void log(LogSeverity, const char *);
 
-/* Compilation class. */
-class Compiler
-{
-    public:
-        Compiler() {}
-        virtual ~Compiler() {}
-
-        bool compile(std::string inFile, std::string outFile);
-
-        bool decompile(std::string inFile, std::string outFile);
-
-    private:
-        /* Perform a checksum over a region of data. */
-        size_t sumBytes(const char *data, size_t len);
-        unsigned short doChecksum(size_t sum);
-
-#ifdef _MSC_VER
-#pragma pack(push, 1)
-#endif
-
-        /* 8xp file header */
-        struct ProgramHeader
-        {
-            char sig[9];
-            char extsig[3];
-            char comment[42];
-            unsigned short datalen;
-        } PACKED;
-
-        /* Variable entry */
-        struct VariableEntry
-        {
-            unsigned short start;
-            unsigned short length1;
-            unsigned char type;
-            char name[8];
-            char ver;
-            char flags;
-            unsigned short length2;
-        } PACKED;
-
-#ifdef _MSC_VER
-#pragma pack(pop)
-#endif
-};
 
 #endif

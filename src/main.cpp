@@ -1,4 +1,5 @@
 /* 
+ * Copyright (c) 2021 Noah Vogt <noah@noahvogt.com>
  * Copyright (c) 2011 Matthew Iselin
  *
  * Permission to use, copy, modify, and distribute this software for any
@@ -14,30 +15,21 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-/* When VC++ compiles in debug mode, it will set _DEBUG. This sets DEBUG */
-/* in order to avoid the VC++-ism. */
-#ifdef _DEBUG
-#define DEBUG
-#endif
-
 #include <iostream>
 #include <string>
-
 #include <string.h>
 
 #include "tibasic.h"
-
 #ifdef _WIN32
 #include "Shlwapi.h"
 #endif
+#include "compiler.h"
 
 using namespace std;
 
 /* Helper function to convert a string to uppercase. */
-char* strtoupper(char* str)
-{
-	for( size_t i = 0; i < strlen( str ); i++ )
-	{
+char* strtoupper(char* str) {
+	for( size_t i = 0; i < strlen( str ); i++ ) {
 		if( ! ( isupper( str[i] ) ) && isalpha( str[i] ) )
 			str[i] = _toupper( str[i] );
 	}
@@ -45,13 +37,11 @@ char* strtoupper(char* str)
 }
 
 /* Logs output from the build */
-void log(LogSeverity severity, const char *out)
-{
+void log(LogSeverity severity, const char *out) {
     cout << severityToString(severity) << ": " << out << endl;
 }
 
-void stripExtension(const char *in, char *out, size_t len)
-{
+void stripExtension(const char *in, char *out, size_t len) {
     if(strrchr(in, '.') == NULL)
         return;
     strncpy(out, in, len);
@@ -70,18 +60,15 @@ Options:\n\
 \t-v\t\tverbose / debug mode\n\
 \t-h, --help\tprint this help message";
 
-int main( int argc, char* argv[] )
-{
+int main( int argc, char* argv[] ) {
 	/* check for valid number of arguments */
-	if((argc < 2) || (argv[1] == NULL))
-	{
+	if((argc < 2) || (argv[1] == NULL)) {
 		/* display error and help message when no arguments given */
         cout << "Error: " << helpMessage << "\n";
 		return 1;
 	}
 
-    if(!strcmp(argv[1], "-h") || !strcmp(argv[1], "--help"))
-    {
+    if(!strcmp(argv[1], "-h") || !strcmp(argv[1], "--help")) {
 		/* display help message when help flag arguments given */
         cout << helpMessage << "\n";
         return 0;
@@ -95,30 +82,23 @@ int main( int argc, char* argv[] )
 
     /* Parse arguments */
     inFile = argv[argc - 1]; /* Last argument is always filename */
-    for(int i = 1; i < argc - 1; i++)
-    {
-        if(!strcmp(argv[i], "-o") && !outFile.length())
-        {
+    for(int i = 1; i < argc - 1; i++) {
+        if(!strcmp(argv[i], "-o") && !outFile.length()) {
             i++; /* Next argument is filename */
             /* Output filename */
-            if(i >= argc - 1)
-            {
+            if(i >= argc - 1) {
                 log(Error, "-o requires a parameter (output filename).");
                 return 1;
             }
             outFile = argv[i];
-        }
-        else if(!strcmp(argv[i], "-v"))
+        } else if(!strcmp(argv[i], "-v"))
             verbose = true;
         else if(!strcmp(argv[i], "-d"))
             bDecompile = true;
-        else if(!strcmp(argv[i], "--help"))
-        {
+        else if(!strcmp(argv[i], "--help")) {
             cout << helpMessage << "\n";
             return 0;
-        }
-        else
-        {
+        } else {
             log(Error, "Unknown option specified");
             return 1;
         }
@@ -127,19 +107,15 @@ int main( int argc, char* argv[] )
     /* If no output was given, rename the input with .8xp instead of .tib and 
      * use that as the output.
      */
-    if(!outFile.length())
-    {
+    if(!outFile.length()) {
         /* check for file extension and strip it if found */
-        if(strchr(inFile.c_str(), '.'))
-        {
+        if(strchr(inFile.c_str(), '.')) {
             char *tmp = new char[inFile.length()];
             stripExtension(inFile.c_str(), tmp, inFile.length());
 
             outFile = tmp;
             delete [] tmp;
-        }
-        else
-        {
+        } else {
             outFile = inFile;
         }
         
@@ -158,22 +134,18 @@ int main( int argc, char* argv[] )
     initialiseTokens();
 
     /* Compile time! */
-    if(inFile.length() && outFile.length())
-    {
+    if(inFile.length() && outFile.length()) {
         bool res = false;
         if(bDecompile)
             res = pCompiler->decompile(inFile, outFile);
         else
             res = pCompiler->compile(inFile, outFile);
 
-        if(!res)
-        {
+        if(!res) {
             log(Error, "Compilation failed.");
             return 1;
         }
-    }
-    else
-    {
+    } else {
         log(Error, "Either an input or output filename was not given.");
         return 1;
     }
