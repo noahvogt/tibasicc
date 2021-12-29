@@ -1,13 +1,13 @@
-# The TI-BASIC Compiler (tibasicc)
-The TI-BASIC Compiler is all about compiling TI-BASIC code on your computer into an .8xp file ready for transferring to your TI-83/TI-83+/TI-84 calculator (and vice versa).
+# tibasicc
+a (de-)compiler for TI-BASIC with comment support
 
-Being able to type your programs on a real keyboard instead of the calculator's keypad is much easier and avoids some otherwise big pain.
+This little program is all about compiling TI-BASIC code on your computer into an .8xp file ready for transferring to your TI-83/TI-83+/TI-84 calculator (and vice versa). Being able to type your programs on a real keyboard instead of the calculator's keypad is much easier and avoids some otherwise big pain.
 
 *Note:* This project is a fork from [pcmattman/tibasic](https://sourceforge.net/projects/tibasic/).
 
 ## Installation
 #### Unix (GNU/Linux, MacOS, FreeBSD, etc.)
-If you are using Arch, you can just install my [AUR Package](https://aur.archlinux.org/packages/tibasicc-git/) either with your prefered aur helper (paru, yay, etc.) or manually:
+If you are using Arch, you can just install my [AUR Package](https://aur.archlinux.org/packages/tibasicc-git/) either [manually](https://wiki.archlinux.org/title/Arch_User_Repository#Installing_and_upgrading_packages) or with your prefered aur helper (paru, yay, etc.):
 
     paru -S tibasicc-git
 
@@ -47,3 +47,8 @@ Preprocessor
 Additional Options
 - verbose / debug mode that gives a lot of information (`-v` flag)
 - specify output file (`-o` flag)
+
+## Possible Future Features / TODO's
+- add a 'check' make target
+- add bash / zsh autocompletion
+- update / add documentation

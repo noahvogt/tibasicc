@@ -19,11 +19,13 @@
 #include <string>
 #include <string.h>
 
-#include "tibasic.h"
 #ifdef _WIN32
 #include "Shlwapi.h"
 #endif
-#include "compiler.h"
+
+#include "log.hh"
+#include "token_util.hh"
+#include "compiler.hh"
 
 using namespace std;
 

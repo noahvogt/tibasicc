@@ -19,7 +19,7 @@
 #include <string>
 #include <string.h>
 
-#include "tibasic.h"
+#include "token_util.hh"
 #include "token_list.h"
 
 using namespace std;
@@ -109,5 +109,3 @@ bool lookupToken(unsigned short in, string &out) {
 
     return true;
 }
-
-

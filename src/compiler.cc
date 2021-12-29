@@ -22,8 +22,9 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "tibasic.h"
-#include "compiler.h"
+#include "token_util.hh"
+#include "log.hh"
+#include "compiler.hh"
 
 using namespace std;
 

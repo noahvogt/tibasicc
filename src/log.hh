@@ -15,32 +15,12 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#ifndef _TIBASIC_H
-#define _TIBASIC_H
-
-#include <string>
-
-/* Stores a token to be written and the size of that token. */
-typedef struct {
-    unsigned short token;
-    size_t sz;
-} token_t;
-
 /* Log severities */
 enum LogSeverity {
     Error,
     Info,
     Debug
 };
-
-void stripExtension(const char *in, char *out, size_t len);
-
-void initialiseTokens();
-
-size_t getLongestToken();
-
-bool lookupToken(std::string in, token_t &ret);
-bool lookupToken(unsigned short in, std::string &out);
 
 inline const char *severityToString(LogSeverity s) {
     switch(s) {
@@ -61,6 +41,3 @@ inline const char *severityToString(LogSeverity s) {
 
 /* Log function */
 void log(LogSeverity, const char *);
-
-
-#endif

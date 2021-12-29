@@ -7,9 +7,9 @@ VERSION = 0.1
 PREFIX = /usr
 
 PROJDIRS := src
-SRCFILES := $(shell find $(PROJDIRS) -type f -name "*.cpp")
-OBJFILES := $(patsubst %.cpp,%.o,$(SRCFILES))
-DEPFILES := $(patsubst %.cpp,%.d,$(SRCFILES))
+SRCFILES := $(shell find $(PROJDIRS) -type f -name "*.cc")
+OBJFILES := $(patsubst %.cc,%.o,$(SRCFILES))
+DEPFILES := $(patsubst %.cc,%.d,$(SRCFILES))
 
 .PHONY: all clean
 

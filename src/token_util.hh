@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (c) 2021 Noah Vogt <noah@noahvogt.com>
  * Copyright (c) 2011 Matthew Iselin
  *
@@ -15,27 +15,17 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-/* Describes a potential token to be read by the compiler */
-struct Token {
-    /* The compiled byte for the token */
-	unsigned char data;
+#include <string>
 
-    /* The actual text to be converted by the interpreter */
-	const char* text;
-};
+/* Stores a token to be written and the size of that token. */
+typedef struct {
+    unsigned short token;
+    size_t sz;
+} token_t;
 
-/* A two byte token (0xBB, 0x7E and SysVar) */
-struct TwoByte {
-	unsigned short data;
-	const char* text;
-};
+void initialiseTokens();
 
-/* Direct ASCII character to token conversion. */
-struct ConvertRule {
-	char c;				/* the character */
-	unsigned char tok;	/* the equivalent token */
-};
+size_t getLongestToken();
 
-extern struct Token StandardTokens[200];
-extern struct TwoByte CalcVars[302];
-extern struct ConvertRule Replacements[39];
+bool lookupToken(std::string in, token_t &ret);
+bool lookupToken(unsigned short in, std::string &out);

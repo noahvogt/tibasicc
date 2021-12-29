@@ -15,7 +15,30 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#include "token_util.h"
+/* Describes a potential token to be read by the compiler */
+struct Token {
+    /* The compiled byte for the token */
+	unsigned char data;
+
+    /* The actual text to be converted by the interpreter */
+	const char* text;
+};
+
+/* A two byte token (0xBB, 0x7E and SysVar) */
+struct TwoByte {
+	unsigned short data;
+	const char* text;
+};
+
+/* Direct ASCII character to token conversion. */
+struct ConvertRule {
+	char c;				/* the character */
+	unsigned char tok;	/* the equivalent token */
+};
+
+extern struct Token StandardTokens[200];
+extern struct TwoByte CalcVars[302];
+extern struct ConvertRule Replacements[39];
 
 /* Token List */
 #define TO_DMS			0x01
