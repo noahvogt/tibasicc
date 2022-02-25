@@ -1,8 +1,3 @@
-CVS
-build-etc/Debug
-build-etc/Release
-build-etc/ipch
-build-etc/*sdf
-build-etc/*suo
 src/*.o
 tibasicc
+*.8xp
