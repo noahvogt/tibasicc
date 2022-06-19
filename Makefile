@@ -4,7 +4,7 @@
 VERSION = 0.1
 
 # paths
-PREFIX = /usr
+PREFIX ?= /usr
 
 PROJDIRS := src
 SRCFILES := $(shell find $(PROJDIRS) -type f -name "*.cc")
